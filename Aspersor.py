@@ -1,14 +1,14 @@
 import zmq
 import sys
 
-host = "localhost:10100"
+port = "20000"
 if len(sys.argv) > 1:
     # lee el host
-    host = sys.argv[1]
+    port = sys.argv[1]
 
 context = zmq.Context()
 socket = context.socket(zmq.SUB)
-socket.connect("tcp://%s" % host)
+socket.connect("tcp://*:%s" % port)
 
 # Subscribe
 socket.subscribe("")
