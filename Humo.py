@@ -10,11 +10,20 @@ if len(sys.argv) > 1:
   # lee el host
   host = sys.argv[1]
 
+
+hostAspersor = "localhost:20000"
+if len(sys.argv) > 2:
+  hostAspersor = sys.argv[2]
+  
 # Socket to talk to server
 context = zmq.Context()
 socket = context.socket(zmq.PUB)
 
 socket.connect ("tcp://%s" % host)
+
+
+socketAspersor = context.socket(zmq.REQ)
+socketAspersor.connect("tcp://%s" % hostAspersor)
 
 while True:
     print("En reposo")
@@ -24,3 +33,5 @@ while True:
     random_bool = True if random.random() > 0.9 else False
     socket.send_string("Humo " + str(random_bool))
     print("Se enviò el mensaje al proxy ", "Alerta! se esta incendiando", random_bool)
+    if random_bool == True:
+      socketAspersor.send_string("Alerta")
