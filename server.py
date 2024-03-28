@@ -1,5 +1,6 @@
 import zmq
 import sys
+import time
 
 host = "localhost:10100"
 if len(sys.argv) > 1:
@@ -21,10 +22,20 @@ def procesarMensHumo(msg):
     print("Mensaje no valido") 
 
 
+acumuladorTemp = 0.0
+contadorTemp = 0
 def procesarMensTemp(msg):
+    global acumuladorTemp
+    global contadorTemp
+
     temp= float(msg)
     if temp > 11 and temp < 29.4:
       print("Reporte de la temperatura", msg)
+      acumuladorTemp = acumuladorTemp + temp
+      contadorTemp = contadorTemp +1
+      if contadorTemp >= 10:
+        promedio = acumuladorTemp / contadorTemp
+        print ("La temperatura promedio es:", promedio, time.strftime("%c"))
     else:
        print("Mensaje no valido")
    
