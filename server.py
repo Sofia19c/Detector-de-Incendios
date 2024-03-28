@@ -40,11 +40,23 @@ def procesarMensTemp(msg):
         contadorTemp = 0
     else:
        print("Mensaje no valido")
-   
+
+acumuladorHume = 0.0
+contadorHume = 0  
 def procesarMensHume(msg):
+    global acumuladorHume
+    global contadorHume
+
     hume = float(msg)
     if hume > 0.7 and hume < 1:
       print("Reporte de humedad", msg)
+      acumuladorHume = acumuladorHume + hume
+      contadorHume = contadorHume +1
+      if contadorHume >= 10:
+        promedio = acumuladorHume / contadorHume
+        print ("La humedad promedio es:", promedio, time.strftime("%c"))
+        acumuladorHume = 0.0
+        contadorHume = 0
     else:
        print("Mensaje no valido")
 
