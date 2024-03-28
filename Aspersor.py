@@ -8,7 +8,7 @@ if len(sys.argv) > 1:
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)
-socket.connect("tcp://*:%s" % port)
+socket.bind("tcp://*:%s" % port)
 
 
 def procesarMensHumo():
