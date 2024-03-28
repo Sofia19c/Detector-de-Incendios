@@ -13,22 +13,27 @@ socket.connect("tcp://%s" % host)
 socket.subscribe("")
 
 def procesarMensHumo(msg):
-  """
-  docstring
-  """
-  print("Reporte de humo: ", msg)
+  if msg == "True":
+    print("Reporte de humo: ", msg)
+  elif msg == "False":
+    print("Reporte de humo: ", msg)
+  else:
+    print("Mensaje no valido") 
+
 
 def procesarMensTemp(msg):
-    """
-    docstring
-    """
-    print("Reporte de la temperatura", msg)
-
+    temp= float(msg)
+    if temp > 11 and temp < 29.4:
+      print("Reporte de la temperatura", msg)
+    else:
+       print("Mensaje no valido")
+   
 def procesarMensHume(msg):
-    """
-    docstring
-    """
-    print("Reporte de humedad", msg)
+    hume = float(msg)
+    if hume > 0.7 and hume < 1:
+      print("Reporte de humedad", msg)
+    else:
+       print("Mensaje no valido")
 
 def procesarMensAsper(msg):
     """
