@@ -35,3 +35,5 @@ while True:
     print("Se enviò el mensaje al proxy ", "Alerta! se esta incendiando", random_bool)
     if random_bool == True:
       socketAspersor.send_string("Alerta")
+      socketAspersor.recv_string()
+    

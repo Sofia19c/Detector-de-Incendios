@@ -11,9 +11,8 @@ socket = context.socket(zmq.REP)
 socket.connect("tcp://*:%s" % port)
 
 
-def procesarMensHumo(msg):
-    if msg == "True":
-      print("ALERTA! ASPERSOR ENCENDIDO")
+def procesarMensHumo():
+    print("ALERTA! ASPERSOR ENCENDIDO")
 
 
 # Process 5 updates
@@ -22,4 +21,5 @@ while True:
     msg = socket.recv_string()
     print("Recibido un mensaje")
     if msg == "Alerta":
-        procesarMensHumo(msg)
+        procesarMensHumo()
+    socket.send_string("Response")
