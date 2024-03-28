@@ -36,6 +36,8 @@ def procesarMensTemp(msg):
       if contadorTemp >= 10:
         promedio = acumuladorTemp / contadorTemp
         print ("La temperatura promedio es:", promedio, time.strftime("%c"))
+        acumuladorTemp = 0.0
+        contadorTemp = 0
     else:
        print("Mensaje no valido")
    
