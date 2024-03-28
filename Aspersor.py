@@ -7,11 +7,8 @@ if len(sys.argv) > 1:
     port = sys.argv[1]
 
 context = zmq.Context()
-socket = context.socket(zmq.SUB)
+socket = context.socket(zmq.REP)
 socket.connect("tcp://*:%s" % port)
-
-# Subscribe
-socket.subscribe("")
 
 
 def procesarMensHumo(msg):
@@ -22,8 +19,7 @@ def procesarMensHumo(msg):
 # Process 5 updates
 while True:
     print("Escuchando ...")
-    total_value = 0
-    topic, msg = socket.recv_string().split(" ")
+    msg = socket.recv_string()
     print("Recibido un mensaje")
-    if topic == "Humo":
+    if msg == "Alerta":
         procesarMensHumo(msg)
